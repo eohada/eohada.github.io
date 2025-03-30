@@ -1,0 +1,245 @@
+body 
+{
+    font-family: 'Courier New', monospace;
+    background-color: #0a0a0a;
+    background-image: 
+        linear-gradient(rgba(86, 156, 214, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86, 156, 214, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: #e0e0e0;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    font-variant-ligatures: contextual;
+    text-rendering: optimizeLegibility;
+    max-width: 1000px;
+}
+
+/* Убираем резкие прямоугольники */
+header, nav, main {
+    background: transparent !important;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Эффект мерцания как в старых мониторах */
+@keyframes terminal-flicker {
+    0% { opacity: 0.85; }
+    50% { opacity: 0.90; }
+    100% { opacity: 0.85; }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.02);
+    animation: terminal-flicker 0.1s infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+header, footer 
+{
+    text-align: center;
+    background: #000000;
+    padding: 20px;
+    border-bottom: 1px solid #222;
+}
+
+nav
+{
+    background: rgba(10, 10, 10, 0.3) !important;
+    backdrop-filter: blur(2px);
+    padding: 25px 0;
+    text-align: center;
+    border-bottom: 1px solid #222;
+}
+
+nav a
+{
+    color: #4da6ff;
+    text-decoration: none;
+    margin: 0 25px;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+    position: relative;
+    text-shadow: 0 0 3px rgba(86, 156, 214, 0.3);
+}
+
+nav a:hover
+{
+    color: #76b8ff;
+}
+
+nav a:after
+{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    background-color: #569cd6;
+    transition: all 0.3s ease;
+}
+
+nav a:hover::after
+{
+    width: 100%;
+    left: 0;
+}
+
+nav a.active
+{
+    color:#4caf50;
+    font-weight: bold;
+}
+
+h1 
+{
+    color: #4da6ff;
+    font-size: 2em;
+    text-shadow: 0 0 5px rgba(86, 156, 214, 0.5);
+}
+
+.log-entry
+{
+    border-left: 4px solid;
+    padding: 15px 20px;
+    margin: 20px 0;
+    background: #1a1a1a;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 2px;
+}
+
+.log-entry.info {border-color: #4da6ff;}
+.log-entry.success {border-color: #4caf50}
+.log-entry.error {border-color: #ff4d4d}
+.log-entry.debug {border-color: #ff9800}
+.log-entry.warning {border-color: #ffd700; color: #e0e0e0;}
+
+@keyframes fadeIn 
+{
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.log-entry:hover {
+    background: #222222;
+    transform: translateX(5px);
+}
+
+h2
+{
+    color: #4da6ff;
+    font-size: 1.5em;
+}
+
+p
+{
+    color: #d4d4d4;
+}
+
+@media screen and (max-width: 600px)
+{
+    body 
+    {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .log-entry
+    {
+        margin: 10px 0;
+        padding: 10px;
+    }
+}
+
+/* Стили для элементов логов */
+.log-icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+.log-content {
+    flex: 1;
+}
+
+pre {
+    background-color: #2d2d2d;
+    border-left: 4px solid #569cd6;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+}
+
+#logs-container {
+    max-height: 80vh; /* Максимальная высота контейнера */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+    scrollbar-width: thin; /* Тонкий скроллбар для Firefox */
+    scrollbar-color: #569cd6 #252526; /* Цвет скроллбара */
+}
+
+/* Стили для webkit-браузеров */
+#logs-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+#logs-container::-webkit-scrollbar-track {
+    background: #252526;
+}
+
+#logs-container::-webkit-scrollbar-thumb {
+    background-color: #569cd6;
+    border-radius: 5px;
+}
+
+.log-date-group {
+    margin-bottom: 20px;
+}
+
+.log-date-group h2 {
+    color: #9cdcfe;
+    border-bottom: 2px solid #569cd6;
+    padding-bottom: 10px;
+}
+
+.log-time {
+    color: #569cd6;
+    display: block;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+.log-entry ul {
+    border-left: 2px solid #333;
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+footer {
+    background: transparent !important; 
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    text-shadow: 0 0 3px rgba(86, 156, 214, 0.3);
+}
+
+footer p {
+    color: rgba(86, 156, 214, 0.7);
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
